@@ -51,6 +51,9 @@
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.readingDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.readingValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_AddUpdate = new System.Windows.Forms.Button();
+            this.btn_Delete = new System.Windows.Forms.Button();
+            this.btn_Clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).BeginInit();
@@ -247,11 +250,44 @@
             this.readingValueDataGridViewTextBoxColumn.Name = "readingValueDataGridViewTextBoxColumn";
             this.readingValueDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // btn_AddUpdate
+            // 
+            this.btn_AddUpdate.Location = new System.Drawing.Point(414, 279);
+            this.btn_AddUpdate.Name = "btn_AddUpdate";
+            this.btn_AddUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btn_AddUpdate.TabIndex = 39;
+            this.btn_AddUpdate.Text = "Add";
+            this.btn_AddUpdate.UseVisualStyleBackColor = true;
+            this.btn_AddUpdate.Click += new System.EventHandler(this.Btn_AddUpdate_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Location = new System.Drawing.Point(524, 279);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_Delete.TabIndex = 40;
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
+            // 
+            // btn_Clear
+            // 
+            this.btn_Clear.Location = new System.Drawing.Point(637, 279);
+            this.btn_Clear.Name = "btn_Clear";
+            this.btn_Clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_Clear.TabIndex = 41;
+            this.btn_Clear.Text = "Clear";
+            this.btn_Clear.UseVisualStyleBackColor = true;
+            this.btn_Clear.Click += new System.EventHandler(this.Btn_Clear_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 359);
+            this.Controls.Add(this.btn_Clear);
+            this.Controls.Add(this.btn_Delete);
+            this.Controls.Add(this.btn_AddUpdate);
             this.Controls.Add(this.lbl_TotalEntries);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txt_Overall);
@@ -308,6 +344,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn readingDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn readingValueDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btn_AddUpdate;
+        private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.Button btn_Clear;
     }
 }
 

@@ -101,7 +101,99 @@ namespace A1CDesk
             txt_Overall.Text = AvgOvr.ToString("##.##");
         }
 
+        private void Btn_AddUpdate_Click(object sender, EventArgs e)
+        {
+            DateTime mydate = Entry_Date.Value;
+            mydate.ToString("yyyy/MM/dd");
 
+            //string sTOD = "";
+            //if (rbTODMorning.Checked) { sTOD = "Morning"; }
+            //if (rbTODAfternoon.Checked) { sTOD = "Afternoon"; }
+            //if (rbTODEvening.Checked) { sTOD = "Evening"; }
+
+            string sSQL = "";
+
+            if (btn_AddUpdate.Text == "Add")
+            {
+                sSQL = "Insert into dbo.tbl_A1C (Reading_Date, Reading_Value) values (" +
+                       "'" + mydate.ToString("yyyy/MM/dd") + "', " +
+                       Entry_Value.Value + ")";
+            }
+            else
+            {
+                sSQL = "Update dbo.tbl_A1C Set Reading_Date = " + "'" + mydate.ToString("yyyy/MM/dd") + "', " +
+                                              "Reading_Value = " + Entry_Value.Value + "' Where Id = " + Convert.ToString(Selected_Column_Id);
+            }
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            da.Fill(ds);
+
+            ReDataBind();
+
+            Calc_Avg_A1C();
+
+            ClearEntries();
+        }
+
+        private void Btn_Delete_Click(object sender, EventArgs e)
+        {
+            string sSQL = "Delete From dbo.tbl_A1C Where Id = " + Convert.ToString(Selected_Column_Id);
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            da.Fill(ds);
+
+            ReDataBind();
+
+            Calc_Avg_A1C();
+
+            ClearEntries();
+        }
+
+        private void Btn_Clear_Click(object sender, EventArgs e)
+        {
+            //Entry_Comment.Text = "";
+            Entry_Date.Value = DateTime.Now;
+            Entry_Value.Value = 0;
+            //rbTODMorning.Checked = true;
+
+            btn_AddUpdate.Text = "Add";
+
+            dataGridView1.ClearSelection();
+
+            lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
+        }
+
+
+        public void ClearEntries()
+        {
+            //Entry_Comment.Text = "";
+            Entry_Date.Value = DateTime.Now;
+            Entry_Value.Value = 0;
+            //rbTODMorning.Checked = true;
+
+            btn_AddUpdate.Text = "Add";
+
+            dataGridView1.ClearSelection();
+
+            lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
+        }
+
+        public void ReDataBind()
+        {
+            string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date desc";
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(SQLSelect, sqlcon);
+            DataSet ds = new DataSet();
+            dataAdapter.Fill(ds);
+
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+
+            tblA1CBindingSource.DataSource = ds.Tables[0];
+
+            dataGridView1.DataSource = tblA1CBindingSource;
+        }
 
     }
 }
