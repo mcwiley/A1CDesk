@@ -72,26 +72,26 @@ namespace A1CDesk
             string sSQL90 = "Select AVG(Reading_Value) as my90 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -3, GETDATE()) and GETDATE()";
             string sSQLOver = "Select AVG(Reading_Value) as myOVR From dbo.tbl_A1C";
 
-            //DataSet ds3 = new DataSet();
-            //SqlDataAdapter da3 = new SqlDataAdapter(sSQL30, sqlcon);
-            //da3.Fill(ds3);
-            //double daAvg3 = Convert.ToDouble(ds3.Tables[0].Rows[0]["my30"]);
-            //Avg30 = (double)((46.7 + daAvg3) / 28.7) + 1;
-            //txt_30.Text = Avg30.ToString("##.##");
+            DataSet ds3 = new DataSet();
+            SqlDataAdapter da3 = new SqlDataAdapter(sSQL30, sqlcon);
+            da3.Fill(ds3);
+            double daAvg3 = Convert.ToDouble(ds3.Tables[0].Rows[0]["my30"]);
+            Avg30 = (double)((46.7 + daAvg3) / 28.7) + 1;
+            txt_30.Text = Avg30.ToString("##.##");
 
-            //DataSet ds6 = new DataSet();
-            //SqlDataAdapter da6 = new SqlDataAdapter(sSQL60, sqlcon);
-            //da6.Fill(ds6);
-            //double daAvg6 = Convert.ToDouble(ds6.Tables[0].Rows[0]["my60"]);
-            //Avg60 = (double)((46.7 + daAvg6) / 28.7) + 1;
-            //txt_60.Text = Avg60.ToString("##.##");
+            DataSet ds6 = new DataSet();
+            SqlDataAdapter da6 = new SqlDataAdapter(sSQL60, sqlcon);
+            da6.Fill(ds6);
+            double daAvg6 = Convert.ToDouble(ds6.Tables[0].Rows[0]["my60"]);
+            Avg60 = (double)((46.7 + daAvg6) / 28.7) + 1;
+            txt_60.Text = Avg60.ToString("##.##");
 
-            //DataSet ds9 = new DataSet();
-            //SqlDataAdapter da9 = new SqlDataAdapter(sSQL90, sqlcon);
-            //da9.Fill(ds9);
-            //double daAvg9 = Convert.ToDouble(ds9.Tables[0].Rows[0]["my90"]);
-            //Avg90 = (double)((46.7 + daAvg9) / 28.7) + 1;
-            //txt_90.Text = Avg90.ToString("##.##");
+            DataSet ds9 = new DataSet();
+            SqlDataAdapter da9 = new SqlDataAdapter(sSQL90, sqlcon);
+            da9.Fill(ds9);
+            double daAvg9 = Convert.ToDouble(ds9.Tables[0].Rows[0]["my90"]);
+            Avg90 = (double)((46.7 + daAvg9) / 28.7) + 1;
+            txt_90.Text = Avg90.ToString("##.##");
 
             DataSet dsO = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(sSQLOver, sqlcon);
@@ -106,18 +106,11 @@ namespace A1CDesk
             DateTime mydate = Entry_Date.Value;
             mydate.ToString("yyyy/MM/dd");
 
-            //string sTOD = "";
-            //if (rbTODMorning.Checked) { sTOD = "Morning"; }
-            //if (rbTODAfternoon.Checked) { sTOD = "Afternoon"; }
-            //if (rbTODEvening.Checked) { sTOD = "Evening"; }
-
             string sSQL = "";
 
             if (btn_AddUpdate.Text == "Add")
             {
-                sSQL = "Insert into dbo.tbl_A1C (Reading_Date, Reading_Value) values (" +
-                       "'" + mydate.ToString("yyyy/MM/dd") + "', " +
-                       Entry_Value.Value + ")";
+                sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value) values ('mcwiley', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ")";
             }
             else
             {
@@ -153,10 +146,8 @@ namespace A1CDesk
 
         private void Btn_Clear_Click(object sender, EventArgs e)
         {
-            //Entry_Comment.Text = "";
             Entry_Date.Value = DateTime.Now;
             Entry_Value.Value = 0;
-            //rbTODMorning.Checked = true;
 
             btn_AddUpdate.Text = "Add";
 
@@ -168,10 +159,8 @@ namespace A1CDesk
 
         public void ClearEntries()
         {
-            //Entry_Comment.Text = "";
             Entry_Date.Value = DateTime.Now;
             Entry_Value.Value = 0;
-            //rbTODMorning.Checked = true;
 
             btn_AddUpdate.Text = "Add";
 
