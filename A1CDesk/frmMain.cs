@@ -106,7 +106,7 @@ namespace A1CDesk
             DateTime mydate = Entry_Date.Value;
             mydate.ToString("yyyy/MM/dd");
 
-            string sSQL = "";
+            string sSQL = " ";
 
             if (btn_AddUpdate.Text == "Add")
             {
