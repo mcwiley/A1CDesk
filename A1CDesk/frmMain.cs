@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,9 +17,7 @@ namespace A1CDesk
         public SqlConnection sqlcon = new SqlConnection();
         public int Selected_Column_Id;
         public DateTime Selected_Column_Date;
-        //public string Selected_Column_TOD;
         public int Selected_Column_Value;
-        //public string Selected_Column_Comment;
 
         public frmMain()
         {
@@ -29,7 +26,6 @@ namespace A1CDesk
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dB_103045_a1cdbDataSet.tbl_A1C' table. You can move, or remove it, as needed.
             this.tbl_A1CTableAdapter.Fill(this.dB_103045_a1cdbDataSet.tbl_A1C);
 
             dataGridView1.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -108,15 +104,7 @@ namespace A1CDesk
 
             string sSQL = " ";
 
-            if (btn_AddUpdate.Text == "Add")
-            {
-                sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value) values ('mcwiley', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ")";
-            }
-            else
-            {
-                sSQL = "Update dbo.tbl_A1C Set Reading_Date = " + "'" + mydate.ToString("yyyy/MM/dd") + "', " +
-                                              "Reading_Value = " + Entry_Value.Value + "' Where Id = " + Convert.ToString(Selected_Column_Id);
-            }
+            sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value) values ('mcwiley', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ")";
 
             DataSet ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
@@ -171,7 +159,7 @@ namespace A1CDesk
 
         public void ReDataBind()
         {
-            string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date desc";
+            string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date asc";
 
             SqlDataAdapter dataAdapter = new SqlDataAdapter(SQLSelect, sqlcon);
             DataSet ds = new DataSet();
@@ -184,5 +172,41 @@ namespace A1CDesk
             dataGridView1.DataSource = tblA1CBindingSource;
         }
 
+        private void Btn_Update_Click(object sender, EventArgs e)
+        {
+            DateTime mydate = Entry_Date.Value;
+            mydate.ToString("yyyy/MM/dd");
+
+            string sSQL = "";
+            sSQL = "Update dbo.tbl_A1C Set Reading_Date = " + "'" + mydate.ToString("yyyy/MM/dd") + "', " +
+                                            "Reading_Value = " + Entry_Value.Value + " Where Id = " + Convert.ToString(Selected_Column_Id);
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            da.Fill(ds);
+
+            ReDataBind();
+
+            Calc_Avg_A1C();
+
+            ClearEntries();
+        }
+
+        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int Idx = e.RowIndex;
+                dataGridView1.Rows[Idx].Selected = true;
+
+                Selected_Column_Id = Convert.ToInt32(dataGridView1.Rows[Idx].Cells[0].Value);
+                Selected_Column_Date = Convert.ToDateTime(dataGridView1.Rows[Idx].Cells[1].Value);
+                Selected_Column_Value = Convert.ToInt32(dataGridView1.Rows[Idx].Cells[2].Value);
+
+                Entry_Date.Value = (DateTime)dataGridView1.Rows[Idx].Cells[1].Value;
+
+                Entry_Value.Value = Convert.ToInt32(Selected_Column_Value);
+            }
+        }
     }
 }

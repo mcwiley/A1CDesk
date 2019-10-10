@@ -30,8 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dB_103045_a1cdbDataSet = new A1CDesk.DB_103045_a1cdbDataSet();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readingDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readingValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblA1CBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dB_103045_a1cdbDataSet = new A1CDesk.DB_103045_a1cdbDataSet();
             this.tbl_A1CTableAdapter = new A1CDesk.DB_103045_a1cdbDataSetTableAdapters.tbl_A1CTableAdapter();
             this.lbl_TotalEntries = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -48,15 +51,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Entry_Date = new System.Windows.Forms.DateTimePicker();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readingDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readingValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_AddUpdate = new System.Windows.Forms.Button();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.btn_Clear = new System.Windows.Forms.Button();
+            this.btn_Update = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Entry_Value)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,16 +77,38 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(282, 269);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
             // 
-            // dB_103045_a1cdbDataSet
+            // idDataGridViewTextBoxColumn
             // 
-            this.dB_103045_a1cdbDataSet.DataSetName = "DB_103045_a1cdbDataSet";
-            this.dB_103045_a1cdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // readingDateDataGridViewTextBoxColumn
+            // 
+            this.readingDateDataGridViewTextBoxColumn.DataPropertyName = "Reading_Date";
+            this.readingDateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.readingDateDataGridViewTextBoxColumn.Name = "readingDateDataGridViewTextBoxColumn";
+            this.readingDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // readingValueDataGridViewTextBoxColumn
+            // 
+            this.readingValueDataGridViewTextBoxColumn.DataPropertyName = "Reading_Value";
+            this.readingValueDataGridViewTextBoxColumn.HeaderText = "Value";
+            this.readingValueDataGridViewTextBoxColumn.Name = "readingValueDataGridViewTextBoxColumn";
+            this.readingValueDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tblA1CBindingSource
             // 
             this.tblA1CBindingSource.DataMember = "tbl_A1C";
             this.tblA1CBindingSource.DataSource = this.dB_103045_a1cdbDataSet;
+            // 
+            // dB_103045_a1cdbDataSet
+            // 
+            this.dB_103045_a1cdbDataSet.DataSetName = "DB_103045_a1cdbDataSet";
+            this.dB_103045_a1cdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tbl_A1CTableAdapter
             // 
@@ -229,30 +252,9 @@
             this.Entry_Date.Size = new System.Drawing.Size(88, 23);
             this.Entry_Date.TabIndex = 32;
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // readingDateDataGridViewTextBoxColumn
-            // 
-            this.readingDateDataGridViewTextBoxColumn.DataPropertyName = "Reading_Date";
-            this.readingDateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.readingDateDataGridViewTextBoxColumn.Name = "readingDateDataGridViewTextBoxColumn";
-            this.readingDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // readingValueDataGridViewTextBoxColumn
-            // 
-            this.readingValueDataGridViewTextBoxColumn.DataPropertyName = "Reading_Value";
-            this.readingValueDataGridViewTextBoxColumn.HeaderText = "Value";
-            this.readingValueDataGridViewTextBoxColumn.Name = "readingValueDataGridViewTextBoxColumn";
-            this.readingValueDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // btn_AddUpdate
             // 
-            this.btn_AddUpdate.Location = new System.Drawing.Point(414, 279);
+            this.btn_AddUpdate.Location = new System.Drawing.Point(421, 279);
             this.btn_AddUpdate.Name = "btn_AddUpdate";
             this.btn_AddUpdate.Size = new System.Drawing.Size(75, 23);
             this.btn_AddUpdate.TabIndex = 39;
@@ -262,7 +264,7 @@
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(524, 279);
+            this.btn_Delete.Location = new System.Drawing.Point(609, 279);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(75, 23);
             this.btn_Delete.TabIndex = 40;
@@ -272,7 +274,7 @@
             // 
             // btn_Clear
             // 
-            this.btn_Clear.Location = new System.Drawing.Point(637, 279);
+            this.btn_Clear.Location = new System.Drawing.Point(705, 279);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(75, 23);
             this.btn_Clear.TabIndex = 41;
@@ -280,11 +282,22 @@
             this.btn_Clear.UseVisualStyleBackColor = true;
             this.btn_Clear.Click += new System.EventHandler(this.Btn_Clear_Click);
             // 
+            // btn_Update
+            // 
+            this.btn_Update.Location = new System.Drawing.Point(515, 279);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(75, 23);
+            this.btn_Update.TabIndex = 42;
+            this.btn_Update.Text = "Update";
+            this.btn_Update.UseVisualStyleBackColor = true;
+            this.btn_Update.Click += new System.EventHandler(this.Btn_Update_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 359);
+            this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.btn_Clear);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.btn_AddUpdate);
@@ -312,8 +325,8 @@
             this.Text = "A1CDesk";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Entry_Value)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -347,6 +360,7 @@
         private System.Windows.Forms.Button btn_AddUpdate;
         private System.Windows.Forms.Button btn_Delete;
         private System.Windows.Forms.Button btn_Clear;
+        private System.Windows.Forms.Button btn_Update;
     }
 }
 
