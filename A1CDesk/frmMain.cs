@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : A1CDesk
+// Author           : m_c_w
+// Created          : 10-05-2019
+//
+// Last Modified By : m_c_w
+// Last Modified On : 10-10-2019
+// ***********************************************************************
+// <copyright file="frmMain.cs" company="">
+//     Copyright ©  2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
@@ -12,18 +25,43 @@ using System.Configuration;
 
 namespace A1CDesk
 {
+    /// <summary>
+    /// Class frmMain.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class frmMain : Form
     {
+        /// <summary>
+        /// The sqlcon
+        /// </summary>
         public SqlConnection sqlcon = new SqlConnection();
+        /// <summary>
+        /// The selected column identifier
+        /// </summary>
         public int Selected_Column_Id;
+        /// <summary>
+        /// The selected column date
+        /// </summary>
         public DateTime Selected_Column_Date;
+        /// <summary>
+        /// The selected column value
+        /// </summary>
         public int Selected_Column_Value;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="frmMain"/> class.
+        /// </summary>
         public frmMain()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Load event of the FrmMain control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void FrmMain_Load(object sender, EventArgs e)
         {
             this.tbl_A1CTableAdapter.Fill(this.dB_103045_a1cdbDataSet.tbl_A1C);
@@ -56,6 +94,9 @@ namespace A1CDesk
 
         }
 
+        /// <summary>
+        /// Calculates the average a1 c.
+        /// </summary>
         public void Calc_Avg_A1C()
         {
             double AvgOvr = 0;
@@ -97,6 +138,11 @@ namespace A1CDesk
             txt_Overall.Text = AvgOvr.ToString("##.##");
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_AddUpdate control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Btn_AddUpdate_Click(object sender, EventArgs e)
         {
             DateTime mydate = Entry_Date.Value;
@@ -117,6 +163,11 @@ namespace A1CDesk
             ClearEntries();
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Delete control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
             string sSQL = "Delete From dbo.tbl_A1C Where Id = " + Convert.ToString(Selected_Column_Id);
@@ -132,6 +183,11 @@ namespace A1CDesk
             ClearEntries();
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Clear control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Btn_Clear_Click(object sender, EventArgs e)
         {
             Entry_Date.Value = DateTime.Now;
@@ -145,6 +201,9 @@ namespace A1CDesk
         }
 
 
+        /// <summary>
+        /// Clears the entries.
+        /// </summary>
         public void ClearEntries()
         {
             Entry_Date.Value = DateTime.Now;
@@ -157,6 +216,9 @@ namespace A1CDesk
             lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
         }
 
+        /// <summary>
+        /// Res the data bind.
+        /// </summary>
         public void ReDataBind()
         {
             string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date asc";
@@ -172,6 +234,11 @@ namespace A1CDesk
             dataGridView1.DataSource = tblA1CBindingSource;
         }
 
+        /// <summary>
+        /// Handles the Click event of the Btn_Update control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Btn_Update_Click(object sender, EventArgs e)
         {
             DateTime mydate = Entry_Date.Value;
@@ -192,6 +259,11 @@ namespace A1CDesk
             ClearEntries();
         }
 
+        /// <summary>
+        /// Handles the CellClick event of the DataGridView1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DataGridViewCellEventArgs"/> instance containing the event data.</param>
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

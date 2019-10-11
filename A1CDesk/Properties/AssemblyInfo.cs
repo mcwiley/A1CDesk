@@ -1,4 +1,17 @@
-﻿using System.Reflection;
+﻿// ***********************************************************************
+// Assembly         : A1CDesk
+// Author           : m_c_w
+// Created          : 10-05-2019
+//
+// Last Modified By : m_c_w
+// Last Modified On : 10-05-2019
+// ***********************************************************************
+// <copyright file="AssemblyInfo.cs" company="">
+//     Copyright ©  2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

@@ -1,5 +1,23 @@
-﻿namespace A1CDesk
+﻿// ***********************************************************************
+// Assembly         : A1CDesk
+// Author           : m_c_w
+// Created          : 10-05-2019
+//
+// Last Modified By : m_c_w
+// Last Modified On : 10-10-2019
+// ***********************************************************************
+// <copyright file="frmMain.Designer.cs" company="">
+//     Copyright ©  2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+namespace A1CDesk
 {
+    /// <summary>
+    /// Class frmMain.
+    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class frmMain
     {
         /// <summary>
@@ -335,31 +353,109 @@
 
         #endregion
 
+        /// <summary>
+        /// The data grid view1
+        /// </summary>
         private System.Windows.Forms.DataGridView dataGridView1;
+        /// <summary>
+        /// The d b 103045 a1cdb data set
+        /// </summary>
         private DB_103045_a1cdbDataSet dB_103045_a1cdbDataSet;
+        /// <summary>
+        /// The table a1 c binding source
+        /// </summary>
         private System.Windows.Forms.BindingSource tblA1CBindingSource;
+        /// <summary>
+        /// The table a1 c table adapter
+        /// </summary>
         private DB_103045_a1cdbDataSetTableAdapters.tbl_A1CTableAdapter tbl_A1CTableAdapter;
+        /// <summary>
+        /// The label total entries
+        /// </summary>
         private System.Windows.Forms.Label lbl_TotalEntries;
+        /// <summary>
+        /// The label10
+        /// </summary>
         private System.Windows.Forms.Label label10;
+        /// <summary>
+        /// The text overall
+        /// </summary>
         private System.Windows.Forms.TextBox txt_Overall;
+        /// <summary>
+        /// The label9
+        /// </summary>
         private System.Windows.Forms.Label label9;
+        /// <summary>
+        /// The text 90
+        /// </summary>
         private System.Windows.Forms.TextBox txt_90;
+        /// <summary>
+        /// The label8
+        /// </summary>
         private System.Windows.Forms.Label label8;
+        /// <summary>
+        /// The text 60
+        /// </summary>
         private System.Windows.Forms.TextBox txt_60;
+        /// <summary>
+        /// The label7
+        /// </summary>
         private System.Windows.Forms.Label label7;
+        /// <summary>
+        /// The text 30
+        /// </summary>
         private System.Windows.Forms.TextBox txt_30;
+        /// <summary>
+        /// The label6
+        /// </summary>
         private System.Windows.Forms.Label label6;
+        /// <summary>
+        /// The label5
+        /// </summary>
         private System.Windows.Forms.Label label5;
+        /// <summary>
+        /// The entry value
+        /// </summary>
         private System.Windows.Forms.NumericUpDown Entry_Value;
+        /// <summary>
+        /// The label3
+        /// </summary>
         private System.Windows.Forms.Label label3;
+        /// <summary>
+        /// The label1
+        /// </summary>
         private System.Windows.Forms.Label label1;
+        /// <summary>
+        /// The entry date
+        /// </summary>
         private System.Windows.Forms.DateTimePicker Entry_Date;
+        /// <summary>
+        /// The identifier data grid view text box column
+        /// </summary>
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        /// <summary>
+        /// The reading date data grid view text box column
+        /// </summary>
         private System.Windows.Forms.DataGridViewTextBoxColumn readingDateDataGridViewTextBoxColumn;
+        /// <summary>
+        /// The reading value data grid view text box column
+        /// </summary>
         private System.Windows.Forms.DataGridViewTextBoxColumn readingValueDataGridViewTextBoxColumn;
+        /// <summary>
+        /// The BTN add update
+        /// </summary>
         private System.Windows.Forms.Button btn_AddUpdate;
+        /// <summary>
+        /// The BTN delete
+        /// </summary>
         private System.Windows.Forms.Button btn_Delete;
+        /// <summary>
+        /// The BTN clear
+        /// </summary>
         private System.Windows.Forms.Button btn_Clear;
+        /// <summary>
+        /// The BTN update
+        /// </summary>
         private System.Windows.Forms.Button btn_Update;
     }
 }
