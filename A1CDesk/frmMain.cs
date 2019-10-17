@@ -150,7 +150,7 @@ namespace A1CDesk
 
             string sSQL = " ";
 
-            sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value) values ('mcwiley', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ")";
+            sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value, Comments) values ('MCWILEY', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ", 'None')";
 
             DataSet ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
@@ -194,6 +194,8 @@ namespace A1CDesk
             Entry_Value.Value = 0;
 
             btn_AddUpdate.Text = "Add";
+            
+            ReDataBind();
 
             dataGridView1.ClearSelection();
 
@@ -210,6 +212,8 @@ namespace A1CDesk
             Entry_Value.Value = 0;
 
             btn_AddUpdate.Text = "Add";
+            
+            //ReDataBind();
 
             dataGridView1.ClearSelection();
 
@@ -221,7 +225,7 @@ namespace A1CDesk
         /// </summary>
         public void ReDataBind()
         {
-            string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date asc";
+            string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date desc";
 
             SqlDataAdapter dataAdapter = new SqlDataAdapter(SQLSelect, sqlcon);
             DataSet ds = new DataSet();
