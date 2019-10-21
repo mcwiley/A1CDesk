@@ -73,6 +73,7 @@ namespace A1CDesk
             this.btn_Delete = new System.Windows.Forms.Button();
             this.btn_Clear = new System.Windows.Forms.Button();
             this.btn_Update = new System.Windows.Forms.Button();
+            this.btn_About = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).BeginInit();
@@ -272,9 +273,9 @@ namespace A1CDesk
             // 
             // btn_AddUpdate
             // 
-            this.btn_AddUpdate.Location = new System.Drawing.Point(421, 279);
+            this.btn_AddUpdate.Location = new System.Drawing.Point(393, 283);
             this.btn_AddUpdate.Name = "btn_AddUpdate";
-            this.btn_AddUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btn_AddUpdate.Size = new System.Drawing.Size(65, 23);
             this.btn_AddUpdate.TabIndex = 39;
             this.btn_AddUpdate.Text = "Add";
             this.btn_AddUpdate.UseVisualStyleBackColor = true;
@@ -282,9 +283,9 @@ namespace A1CDesk
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(609, 279);
+            this.btn_Delete.Location = new System.Drawing.Point(535, 283);
             this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_Delete.Size = new System.Drawing.Size(65, 23);
             this.btn_Delete.TabIndex = 40;
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.UseVisualStyleBackColor = true;
@@ -292,9 +293,9 @@ namespace A1CDesk
             // 
             // btn_Clear
             // 
-            this.btn_Clear.Location = new System.Drawing.Point(705, 279);
+            this.btn_Clear.Location = new System.Drawing.Point(606, 283);
             this.btn_Clear.Name = "btn_Clear";
-            this.btn_Clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_Clear.Size = new System.Drawing.Size(65, 23);
             this.btn_Clear.TabIndex = 41;
             this.btn_Clear.Text = "Clear";
             this.btn_Clear.UseVisualStyleBackColor = true;
@@ -302,19 +303,30 @@ namespace A1CDesk
             // 
             // btn_Update
             // 
-            this.btn_Update.Location = new System.Drawing.Point(515, 279);
+            this.btn_Update.Location = new System.Drawing.Point(464, 283);
             this.btn_Update.Name = "btn_Update";
-            this.btn_Update.Size = new System.Drawing.Size(75, 23);
+            this.btn_Update.Size = new System.Drawing.Size(65, 23);
             this.btn_Update.TabIndex = 42;
             this.btn_Update.Text = "Update";
             this.btn_Update.UseVisualStyleBackColor = true;
             this.btn_Update.Click += new System.EventHandler(this.Btn_Update_Click);
+            // 
+            // btn_About
+            // 
+            this.btn_About.Location = new System.Drawing.Point(704, 283);
+            this.btn_About.Name = "btn_About";
+            this.btn_About.Size = new System.Drawing.Size(65, 23);
+            this.btn_About.TabIndex = 43;
+            this.btn_About.Text = "About";
+            this.btn_About.UseVisualStyleBackColor = true;
+            this.btn_About.Click += new System.EventHandler(this.btn_About_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 359);
+            this.Controls.Add(this.btn_About);
             this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.btn_Clear);
             this.Controls.Add(this.btn_Delete);
@@ -340,7 +352,7 @@ namespace A1CDesk
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "A1CDesk";
+            this.Text = "A1CDesk - A tool to help control blood sugar levels";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).EndInit();
@@ -457,6 +469,7 @@ namespace A1CDesk
         /// The BTN update
         /// </summary>
         private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.Button btn_About;
     }
 }
 

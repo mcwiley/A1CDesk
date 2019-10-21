@@ -90,6 +90,8 @@ namespace A1CDesk
 
             sqlcon.ConnectionString = connectionString;
 
+            ReDataBind();
+
             Calc_Avg_A1C();
 
         }
@@ -283,6 +285,12 @@ namespace A1CDesk
 
                 Entry_Value.Value = Convert.ToInt32(Selected_Column_Value);
             }
+        }
+
+        private void btn_About_Click(object sender, EventArgs e)
+        {
+            frmAbout frm = new frmAbout();
+            frm.ShowDialog();
         }
     }
 }
