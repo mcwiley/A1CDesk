@@ -227,9 +227,9 @@ namespace A1CDesk
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(390, 37);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 17);
+            this.label5.Size = new System.Drawing.Size(104, 17);
             this.label5.TabIndex = 22;
-            this.label5.Text = "Calculated A1C:";
+            this.label5.Text = "Estimated A1C:";
             // 
             // Entry_Value
             // 
