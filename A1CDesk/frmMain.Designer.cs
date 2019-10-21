@@ -47,6 +47,7 @@ namespace A1CDesk
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.readingDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,10 +75,12 @@ namespace A1CDesk
             this.btn_Clear = new System.Windows.Forms.Button();
             this.btn_Update = new System.Windows.Forms.Button();
             this.btn_About = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Entry_Value)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -321,11 +324,21 @@ namespace A1CDesk
             this.btn_About.UseVisualStyleBackColor = true;
             this.btn_About.Click += new System.EventHandler(this.btn_About_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(659, 145);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 78);
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 359);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_About);
             this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.btn_Clear);
@@ -358,6 +371,7 @@ namespace A1CDesk
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Entry_Value)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,6 +484,7 @@ namespace A1CDesk
         /// </summary>
         private System.Windows.Forms.Button btn_Update;
         private System.Windows.Forms.Button btn_About;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
