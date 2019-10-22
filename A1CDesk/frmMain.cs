@@ -202,6 +202,10 @@ namespace A1CDesk
             dataGridView1.ClearSelection();
 
             lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
+
+            frmXLS frm = new frmXLS();
+            frm.ShowDialog();
+
         }
 
 
@@ -220,6 +224,8 @@ namespace A1CDesk
             dataGridView1.ClearSelection();
 
             lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
+
+
         }
 
         /// <summary>
