@@ -203,9 +203,6 @@ namespace A1CDesk
 
             lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
 
-            frmXLS frm = new frmXLS();
-            frm.ShowDialog();
-
         }
 
 
@@ -296,6 +293,12 @@ namespace A1CDesk
         private void btn_About_Click(object sender, EventArgs e)
         {
             frmAbout frm = new frmAbout();
+            frm.ShowDialog();
+        }
+
+        private void btn_Export_Click(object sender, EventArgs e)
+        {
+            frmXLS frm = new frmXLS();
             frm.ShowDialog();
         }
     }

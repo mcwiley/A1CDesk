@@ -76,6 +76,7 @@ namespace A1CDesk
             this.btn_Update = new System.Windows.Forms.Button();
             this.btn_About = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_Export = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblA1CBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dB_103045_a1cdbDataSet)).BeginInit();
@@ -237,7 +238,7 @@ namespace A1CDesk
             // 
             // Entry_Value
             // 
-            this.Entry_Value.Location = new System.Drawing.Point(496, 195);
+            this.Entry_Value.Location = new System.Drawing.Point(502, 187);
             this.Entry_Value.Maximum = new decimal(new int[] {
             500,
             0,
@@ -249,7 +250,7 @@ namespace A1CDesk
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(390, 195);
+            this.label3.Location = new System.Drawing.Point(396, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 37;
@@ -258,7 +259,7 @@ namespace A1CDesk
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(390, 160);
+            this.label1.Location = new System.Drawing.Point(396, 152);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 31;
@@ -269,14 +270,14 @@ namespace A1CDesk
             // 
             this.Entry_Date.CustomFormat = "yyyy/MM/dd";
             this.Entry_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.Entry_Date.Location = new System.Drawing.Point(496, 157);
+            this.Entry_Date.Location = new System.Drawing.Point(502, 149);
             this.Entry_Date.Name = "Entry_Date";
             this.Entry_Date.Size = new System.Drawing.Size(88, 23);
             this.Entry_Date.TabIndex = 32;
             // 
             // btn_AddUpdate
             // 
-            this.btn_AddUpdate.Location = new System.Drawing.Point(393, 283);
+            this.btn_AddUpdate.Location = new System.Drawing.Point(393, 257);
             this.btn_AddUpdate.Name = "btn_AddUpdate";
             this.btn_AddUpdate.Size = new System.Drawing.Size(65, 23);
             this.btn_AddUpdate.TabIndex = 39;
@@ -286,7 +287,7 @@ namespace A1CDesk
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(535, 283);
+            this.btn_Delete.Location = new System.Drawing.Point(602, 257);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(65, 23);
             this.btn_Delete.TabIndex = 40;
@@ -296,7 +297,7 @@ namespace A1CDesk
             // 
             // btn_Clear
             // 
-            this.btn_Clear.Location = new System.Drawing.Point(606, 283);
+            this.btn_Clear.Location = new System.Drawing.Point(701, 257);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(65, 23);
             this.btn_Clear.TabIndex = 41;
@@ -306,7 +307,7 @@ namespace A1CDesk
             // 
             // btn_Update
             // 
-            this.btn_Update.Location = new System.Drawing.Point(464, 283);
+            this.btn_Update.Location = new System.Drawing.Point(497, 257);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(65, 23);
             this.btn_Update.TabIndex = 42;
@@ -316,7 +317,7 @@ namespace A1CDesk
             // 
             // btn_About
             // 
-            this.btn_About.Location = new System.Drawing.Point(704, 283);
+            this.btn_About.Location = new System.Drawing.Point(701, 283);
             this.btn_About.Name = "btn_About";
             this.btn_About.Size = new System.Drawing.Size(65, 23);
             this.btn_About.TabIndex = 43;
@@ -327,17 +328,28 @@ namespace A1CDesk
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(659, 145);
+            this.pictureBox1.Location = new System.Drawing.Point(665, 137);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 78);
             this.pictureBox1.TabIndex = 44;
             this.pictureBox1.TabStop = false;
+            // 
+            // btn_Export
+            // 
+            this.btn_Export.Location = new System.Drawing.Point(393, 283);
+            this.btn_Export.Name = "btn_Export";
+            this.btn_Export.Size = new System.Drawing.Size(65, 23);
+            this.btn_Export.TabIndex = 45;
+            this.btn_Export.Text = "Export";
+            this.btn_Export.UseVisualStyleBackColor = true;
+            this.btn_Export.Click += new System.EventHandler(this.btn_Export_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 359);
+            this.Controls.Add(this.btn_Export);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_About);
             this.Controls.Add(this.btn_Update);
@@ -485,6 +497,7 @@ namespace A1CDesk
         private System.Windows.Forms.Button btn_Update;
         private System.Windows.Forms.Button btn_About;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btn_Export;
     }
 }
 
