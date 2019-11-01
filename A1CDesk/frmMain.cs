@@ -12,8 +12,11 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
+
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.OleDb;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -35,7 +38,8 @@ namespace A1CDesk
         /// <summary>
         /// The sqlcon
         /// </summary>
-        public SqlConnection sqlcon = new SqlConnection();
+        //public SqlConnection sqlcon = new SqlConnection();
+        public OleDbConnection sqlcon = new OleDbConnection();
         /// <summary>
         /// The selected column identifier
         /// </summary>
@@ -86,7 +90,8 @@ namespace A1CDesk
 
             lbl_TotalEntries.Text = dataGridView1.RowCount.ToString();
 
-            string connectionString = ConfigurationManager.ConnectionStrings["A1CDesk.Properties.Settings.DB_103045_a1cdbConnectionString"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings["A1CDesk.Properties.Settings.DB_103045_a1cdbConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["myAccessA1C"].ConnectionString;
 
             sqlcon.ConnectionString = connectionString;
 
@@ -106,34 +111,56 @@ namespace A1CDesk
             double Avg60 = 0;
             double Avg90 = 0;
 
-            string sSQL30 = "Select AVG(Reading_Value) as my30 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -1, GETDATE()) and GETDATE()";
-            string sSQL60 = "Select AVG(Reading_Value) as my60 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -2, GETDATE()) and GETDATE()";
-            string sSQL90 = "Select AVG(Reading_Value) as my90 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -3, GETDATE()) and GETDATE()";
-            string sSQLOver = "Select AVG(Reading_Value) as myOVR From dbo.tbl_A1C";
+            DateTime todayDate = new DateTime();
+
+            todayDate = DateTime.Now;
+
+            string last30 = "";
+            string last60 = "";
+            string last90 = "";
+            
+            last30 = todayDate.AddMonths(-1).ToString("d");
+            last60 = todayDate.AddMonths(-2).ToString("d");
+            last90 = todayDate.AddMonths(-3).ToString("d");
+
+            //string sSQL30 = "Select AVG(Reading_Value) as my30 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -1, GETDATE()) and GETDATE()";
+            //string sSQL60 = "Select AVG(Reading_Value) as my60 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -2, GETDATE()) and GETDATE()";
+            //string sSQL90 = "Select AVG(Reading_Value) as my90 From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -3, GETDATE()) and GETDATE()";
+            //string sSQLOver = "Select AVG(Reading_Value) as myOVR From dbo.tbl_A1C";
+
+            string sSQL30 = "Select AVG(Reading_Value) as my30 From dbo_tbl_A1C where Reading_Date between '" + last30 + "' and '" + todayDate.ToString("d") + "'";
+            string sSQL60 = "Select AVG(Reading_Value) as my60 From dbo_tbl_A1C where Reading_Date between '" + last60 + "' and '" + todayDate.ToString("d") + "'";
+            string sSQL90 = "Select AVG(Reading_Value) as my90 From dbo_tbl_A1C where Reading_Date between '" + last90 + "' and '" + todayDate.ToString("d") + "'";
+            
+            string sSQLOver = "Select AVG(Reading_Value) as myOVR From dbo_tbl_A1C";
 
             DataSet ds3 = new DataSet();
-            SqlDataAdapter da3 = new SqlDataAdapter(sSQL30, sqlcon);
+            //SqlDataAdapter da3 = new SqlDataAdapter(sSQL30, sqlcon);
+            OleDbDataAdapter da3 = new OleDbDataAdapter(sSQL30, sqlcon);
             da3.Fill(ds3);
             double daAvg3 = Convert.ToDouble(ds3.Tables[0].Rows[0]["my30"]);
             Avg30 = (double)((46.7 + daAvg3) / 28.7) + 1;
             txt_30.Text = Avg30.ToString("##.##");
 
             DataSet ds6 = new DataSet();
-            SqlDataAdapter da6 = new SqlDataAdapter(sSQL60, sqlcon);
+            //SqlDataAdapter da6 = new SqlDataAdapter(sSQL60, sqlcon);
+            OleDbDataAdapter da6 = new OleDbDataAdapter(sSQL60, sqlcon);
             da6.Fill(ds6);
             double daAvg6 = Convert.ToDouble(ds6.Tables[0].Rows[0]["my60"]);
             Avg60 = (double)((46.7 + daAvg6) / 28.7) + 1;
             txt_60.Text = Avg60.ToString("##.##");
 
             DataSet ds9 = new DataSet();
-            SqlDataAdapter da9 = new SqlDataAdapter(sSQL90, sqlcon);
+            //SqlDataAdapter da9 = new SqlDataAdapter(sSQL90, sqlcon);
+            OleDbDataAdapter da9 = new OleDbDataAdapter(sSQL90, sqlcon);
             da9.Fill(ds9);
             double daAvg9 = Convert.ToDouble(ds9.Tables[0].Rows[0]["my90"]);
             Avg90 = (double)((46.7 + daAvg9) / 28.7) + 1;
             txt_90.Text = Avg90.ToString("##.##");
 
             DataSet dsO = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter(sSQLOver, sqlcon);
+            //SqlDataAdapter da = new SqlDataAdapter(sSQLOver, sqlcon);
+            OleDbDataAdapter da = new OleDbDataAdapter(sSQLOver, sqlcon);
             da.Fill(dsO);
             double daAvgOvr = Convert.ToDouble(dsO.Tables[0].Rows[0]["myOVR"]);
             AvgOvr = (double)((46.7 + daAvgOvr) / 28.7) + 1;
@@ -152,10 +179,12 @@ namespace A1CDesk
 
             string sSQL = " ";
 
-            sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value, Comments) values ('MCWILEY', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ", 'None')";
+            //sSQL = "Insert into dbo.tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value, Comments) values ('MCWILEY', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ", 'None')";
+            sSQL = "Insert into dbo_tbl_A1C (userID,Reading_Date, Reading_TOD, Reading_Value, Comments) values ('MCWILEY', '" + mydate.ToString("yyyy/MM/dd") + "', '1', " + Entry_Value.Value + ", 'None')";
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            //SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            OleDbDataAdapter da = new OleDbDataAdapter(sSQL, sqlcon);
             da.Fill(ds);
 
             ReDataBind();
@@ -172,10 +201,12 @@ namespace A1CDesk
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            string sSQL = "Delete From dbo.tbl_A1C Where Id = " + Convert.ToString(Selected_Column_Id);
+            //string sSQL = "Delete From dbo.tbl_A1C Where Id = " + Convert.ToString(Selected_Column_Id);
+            string sSQL = "Delete From dbo_tbl_A1C Where Id = " + Convert.ToString(Selected_Column_Id);
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            //SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            OleDbDataAdapter da = new OleDbDataAdapter(sSQL, sqlcon);
             da.Fill(ds);
 
             ReDataBind();
@@ -230,13 +261,17 @@ namespace A1CDesk
         /// </summary>
         public void ReDataBind()
         {
-            string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date desc";
+            //string SQLSelect = "Select * From dbo.tbl_A1C Order By Reading_Date desc";
+            string SQLSelect = "Select * From dbo_tbl_A1C Order By Reading_Date desc";
 
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(SQLSelect, sqlcon);
+            //SqlDataAdapter dataAdapter = new SqlDataAdapter(SQLSelect, sqlcon);
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(SQLSelect, sqlcon);
+
             DataSet ds = new DataSet();
             dataAdapter.Fill(ds);
 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+            //SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+            OleDbCommandBuilder commandBuilder = new OleDbCommandBuilder(dataAdapter);
 
             tblA1CBindingSource.DataSource = ds.Tables[0];
 
@@ -254,11 +289,14 @@ namespace A1CDesk
             mydate.ToString("yyyy/MM/dd");
 
             string sSQL = "";
-            sSQL = "Update dbo.tbl_A1C Set Reading_Date = " + "'" + mydate.ToString("yyyy/MM/dd") + "', " +
+            //sSQL = "Update dbo.tbl_A1C Set Reading_Date = " + "'" + mydate.ToString("yyyy/MM/dd") + "', " +
+            //                                "Reading_Value = " + Entry_Value.Value + " Where Id = " + Convert.ToString(Selected_Column_Id);
+            sSQL = "Update dbo_tbl_A1C Set Reading_Date = " + "'" + mydate.ToString("yyyy/MM/dd") + "', " +
                                             "Reading_Value = " + Entry_Value.Value + " Where Id = " + Convert.ToString(Selected_Column_Id);
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            //SqlDataAdapter da = new SqlDataAdapter(sSQL, sqlcon);
+            OleDbDataAdapter da = new OleDbDataAdapter(sSQL, sqlcon);
             da.Fill(ds);
 
             ReDataBind();
