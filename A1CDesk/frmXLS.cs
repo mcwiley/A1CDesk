@@ -18,8 +18,8 @@ namespace A1CDesk
 {
     public partial class frmXLS : Form
     {
-        //public SqlConnection sqlcon = new SqlConnection();
-        public OleDbConnection sqlcon = new OleDbConnection();
+        public SqlConnection sqlcon = new SqlConnection();
+        //public OleDbConnection sqlcon = new OleDbConnection();
 
         public frmXLS()
         {
@@ -60,46 +60,80 @@ namespace A1CDesk
 
             if (rbtn_30Day.Checked)
             {
-                //sqlOutput = "Select * From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -1, GETDATE()) and GETDATE() Order By Reading_Date desc";
-                sqlOutput = sSQL30; 
+                sqlOutput = "Select Reading_Date, Reading_Value From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -1, GETDATE()) and GETDATE() Order By Reading_Date desc";
+                //sqlOutput = sSQL30; 
             }
             if (rbtn_60Day.Checked)
             {
-                //sqlOutput = "Select * From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -2, GETDATE()) and GETDATE() Order By Reading_Date desc";
-                sqlOutput = sSQL60; 
+                sqlOutput = "Select Reading_Date, Reading_Value From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -2, GETDATE()) and GETDATE() Order By Reading_Date desc";
+                //sqlOutput = sSQL60; 
             }
             if (rbtn_90Day.Checked)
             {
-                //sqlOutput = "Select * From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -3, GETDATE()) and GETDATE() Order By Reading_Date desc";
-                sqlOutput = sSQL90; 
+                sqlOutput = "Select Reading_Date, Reading_Value From dbo.tbl_A1C where Reading_Date between DATEADD(MONTH, -3, GETDATE()) and GETDATE() Order By Reading_Date desc";
+                //sqlOutput = sSQL90; 
             }
             if (rbtn_AllDay.Checked)
             {
-                //sqlOutput = "Select * From dbo.tbl_A1C Order By Reading_Date desc";
-                sqlOutput = "Select Reading_Date, Reading_Value From dbo_tbl_A1C Order By Reading_Date Order By Reading_Date desc";
+                sqlOutput = "Select Reading_Date, Reading_Value From dbo.tbl_A1C Order By Reading_Date desc";
+                //sqlOutput = "Select Reading_Date, Reading_Value From dbo_tbl_A1C Order By Reading_Date Order By Reading_Date desc";
             }
 
-            //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["A1CDesk.Properties.Settings.DB_103045_a1cdbConnectionString"].ConnectionString);
-            OleDbConnection acccon = new OleDbConnection(ConfigurationManager.ConnectionStrings["myAccessA1C"].ConnectionString);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["A1CDesk.Properties.Settings.DB_103045_a1cdbConnectionString"].ConnectionString);
+            //OleDbConnection acccon = new OleDbConnection(ConfigurationManager.ConnectionStrings["myAccessA1C"].ConnectionString);
             
             ////Set the locale for each
             ds.Locale = System.Threading.Thread.CurrentThread.CurrentCulture;
             dt.Locale = System.Threading.Thread.CurrentThread.CurrentCulture;
 
             ////Open a DB connection (in this example with OleDB)
-            //con.Open();
-            acccon.Open();
+            con.Open();
+            //acccon.Open();
             
-            //SqlCommand cmd = new SqlCommand(sqlOutput, con);
-            //SqlDataAdapter adptr = new SqlDataAdapter();
-            OleDbCommand cmd = new OleDbCommand(sqlOutput, acccon);
-            OleDbDataAdapter adptr = new OleDbDataAdapter();
+            SqlCommand cmd = new SqlCommand(sqlOutput, con);
+            SqlDataAdapter adptr = new SqlDataAdapter();
+            //OleDbCommand cmd = new OleDbCommand(sqlOutput, acccon);
+            //OleDbDataAdapter adptr = new OleDbDataAdapter();
 
             adptr.SelectCommand = cmd;
             adptr.Fill(ds);
             
-            //con.Close();
-            acccon.Close();
+            con.Close();
+            //acccon.Close();
+
+            DataTable tbl = new DataTable();
+
+            // Create a DataColumn and set various properties. 
+            DataColumn column1 = new DataColumn();
+            column1.DataType = System.Type.GetType("System.String");
+            column1.AllowDBNull = false;
+            column1.ColumnName = "Date";
+            DataColumn column2 = new DataColumn();
+            column2.DataType = System.Type.GetType("System.String");
+            column2.AllowDBNull = false;
+            column2.ColumnName = "Value";
+
+            // Add the column to the table. 
+            tbl.Columns.Add(column1);
+            tbl.Columns.Add(column2);
+
+            DataRow rw;
+            foreach(DataRow dr in ds.Tables[0].Rows)
+            {
+                DateTime daDate = dr.Field<DateTime>(0);
+                string sRDate = daDate.ToString("d");
+                string sRValue = Convert.ToString(dr.Field<int>(1));
+                
+                rw = tbl.NewRow();
+                
+                rw["Date"] = sRDate;
+                rw["Value"] = sRValue;
+
+                tbl.Rows.Add(rw);
+            }
+
+            DataSet newDS = new DataSet();
+            newDS.Tables.Add(tbl);
 
             string strOutMessage = "";
 
@@ -110,7 +144,7 @@ namespace A1CDesk
                 {
                     string folderName = folderBrowserDialog1.SelectedPath;
 
-                    ExcelLibrary.DataSetHelper.CreateWorkbook(folderName + "\\" + txt_OutFileName.Text + ".xls", ds);
+                    ExcelLibrary.DataSetHelper.CreateWorkbook(folderName + "\\" + txt_OutFileName.Text + ".xls", newDS); //ds);
 
                     strOutMessage = folderName + "\\" + txt_OutFileName.Text + ".xls";
 
